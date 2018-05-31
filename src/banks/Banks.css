@@ -1,0 +1,12 @@
+.BanksContainer {
+  display: flex;
+  align-items: center;
+  border: 1px solid #002742;
+  border-radius: 3px;
+  margin: 5px;
+  background-color: #FAFAFA;
+}
+
+.BanksLogo {
+  height: 60px;
+}
