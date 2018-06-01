@@ -5,6 +5,7 @@ import './Atms.css';
 /**
  * Stateless component which renders a single ATM component.
  * Clicking on it will launch google maps with the ATM's coordinates
+ *
  */
 const AtmsComponent = ({ name, countryCode, address, googleMapsUrl, distance, numOfAtms }) => (
 	<a href={googleMapsUrl} target="_blank">
