@@ -1,5 +1,5 @@
 
-After installing the app type 'npm start' to run it.
+After installing the app type 'npm run dev' to run it. (NOT 'npm start')
 The app will launch on http://localhost:3000
 
 Implementation Notes:
@@ -8,17 +8,21 @@ Implementation Notes:
 	  I thought having more than one would demonstrate my structure better.
 	- Decided there is no need for a state management library like Redux at this point.
 	
-Issues:
-	 - Many of the bank API Urls give a CORS error, so I did a quick temporary work around in AtmsContainer.
-	   With the workaround some request can be slow (to try to help with this I have cached the data)		
-
 Time Taken:
 	-3 hours to get it all working
 	-Then as much time as I liked to:
 		-clean up the code fully
 		-add tests
-		-use CSS Modules (figure out how to add this without ejecting)
-		-fix CORS issue
+		-fix the CORS issue - many of the bank API Urls give a CORS error, 
+		 so I setup another local server to proxy the requests through. (I didn't want to eject the create-react-app)
 
 TODO's:
 	-think about whether we want to update the results if the geolocation changes (maybe a refresh button)
+	-use CSS Modules (would like to be able to do this without ejecting
+	 https://medium.com/@kitze/configure-create-react-app-without-ejecting-d8450e96196a)
+	 
+	 
+Finish off:
+add tests
+work on router more so can clean up?
+format it all nicely and consistently

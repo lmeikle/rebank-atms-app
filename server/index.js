@@ -1,36 +1,16 @@
 const express = require("express");
-const http = require('http');
-const url = require('url')
+const url = require('url');
+const request = require('request');
 
 const app = express();
 
-app.get('/:host*', function (request, response, next) {
-
-	var proxyurl = url.parse(request.url);
-	var path = request.params[0];
-	if (!!proxyurl.search) {
-		path += proxyurl.search;
-	}
-console.log("path", path)
-	console.log("equest.params.host", request.params.host)
-
-	http.get({
-		host: request.params.host,
-		path: path,
-		headers: {}
-	}, function(res) {
-		var body = '';
-
-		res.on('data', function(chunk) {
-			body += chunk;
-		});
-
-		res.on('end', function() {
-			response.end(body);
-		});
-	}).on('error', function(e) {
-		console.log("Got error: ", e);
-	});
+/**
+ * Proxy api calls through here to avoid CORS issues locally
+ */
+app.get('/api', function(req, res) {
+	let url_parts = url.parse(req.url, true);
+	let query = url_parts.query;
+	request(query.url).pipe(res);
 });
 
 app.listen(3001);

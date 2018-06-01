@@ -15,39 +15,16 @@ const AtmsAPI = {
 			return Promise.resolve(AtmsAPI.ATM_DATA_CACHE[url]);
 		}
 
-		//url = url.replace("https://", "");
-		//url = "http://localhost:3000/" + url;
-		//console.log("url " + url)
+		// when running locally we need to proxy the requests through our local server, just using a crude check
+		if (window.location.hostname === "localhost")
+		{
+			url = "api/?url=" + url;
+		}
 
 		return fetch(url)
 			.then(response => response.json())
 			.then(responseJson => AtmsAPI._processATMResponse(responseJson, url))
-			.catch(error =>
-			{
-				// many of the banks give a CORS error
-				// the below is a 'quick' temporary workaround
-				// just proxy the request through https://cors.io - but this only works
-				// with XMLHttpRequest! not fetch
-				return new Promise((resolve, reject) => {
-					let xhr = new XMLHttpRequest();
-					xhr.onreadystatechange = () =>
-					{
-						if (xhr.readyState === XMLHttpRequest.DONE)
-						{
-							if (xhr.responseText)
-							{
-								resolve(AtmsAPI._processATMResponse(JSON.parse(xhr.responseText), url))
-							}
-							else
-							{
-								reject(error);
-							}
-						}
-					};
-					xhr.open("GET", AtmsAPI.CORS_WORKAROUND_URL + url, true);
-					xhr.send(null);
-				})
-			});
+			.catch(error => error);
 	},
 
 	/**
