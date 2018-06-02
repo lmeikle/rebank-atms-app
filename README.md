@@ -10,19 +10,10 @@ Implementation Notes:
 Time Taken:
 
 * 3 hours to get it all working.
-* Then as much time as I liked to clean up the code fully, add a some tests, fix the local CORS issue.
+* Then as much time as I liked to clean up the code fully, add a some tests and fix the local CORS issue.
 
 TODO's:
 
-* Continue to improve test coverage more
+* Continue to improve test coverage
 * use CSS Modules (I would like to be able to do this without ejecting
   https://medium.com/@kitze/configure-create-react-app-without-ejecting-d8450e96196a)
-
----
-
-work on router more so can clean up?
-const { geolocation, atms, error } = this.state;
-let name = '';
-if (this.props.location && this.props.location.state) {
-name = this.props.location.state.name;
-}

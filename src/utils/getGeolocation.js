@@ -11,7 +11,6 @@ export default function getGeolocation() {
     } else {
       navigator.geolocation.getCurrentPosition(positon => {
         geolocation = positon;
-        console.log('geolocation', geolocation);
         resolve(geolocation);
       });
     }

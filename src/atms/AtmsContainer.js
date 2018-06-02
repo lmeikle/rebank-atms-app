@@ -13,6 +13,7 @@ class AtmsContainer extends Component {
     super(props);
 
     this.state = {
+      name: null,
       geolocation: null,
       atms: null,
       error: null
@@ -25,10 +26,11 @@ class AtmsContainer extends Component {
 
   componentDidMount() {
     if (this.props.location.state) {
-      let { url } = this.props.location.state;
+      let { name, url } = this.props.location.state;
       if (url) {
         // reset some of the state
         this.setState({
+          name,
           atms: null,
           error: null
         });
@@ -90,11 +92,7 @@ class AtmsContainer extends Component {
   }
 
   render() {
-    const { geolocation, atms, error } = this.state;
-    let name = '';
-    if (this.props.location && this.props.location.state) {
-      name = this.props.location.state.name;
-    }
+    const { name, geolocation, atms, error } = this.state;
 
     if (error) {
       return (
