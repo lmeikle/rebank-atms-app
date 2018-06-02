@@ -6,20 +6,20 @@ export function fetchAtmData(url) {
 
   // check if we already have the data in the cache
   if (ATM_DATA_CACHE[url]) {
-    console.log('Getting data for ' + url + ' from ATM_DATA_CACHE');
     return Promise.resolve(ATM_DATA_CACHE[url]);
   }
 
   return fetch(url)
     .then(response => response.json())
-    .then(responseJson => processATMResponse(responseJson, url))
-    .catch(error => error);
+    .then(responseJson => processATMResponse(responseJson, url));
 }
 
 const ATM_DATA_CACHE = {};
 
 const processATMResponse = (response, url) => {
   if (response) {
+    if (!response.data) throw new Error('Response is empty');
+
     let brandNode = response.data[0].Brand[0];
     let brandName = brandNode.BrandName;
 

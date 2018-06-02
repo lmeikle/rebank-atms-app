@@ -39,7 +39,7 @@ class AtmsContainer extends Component {
 
         fetchAtmData(url)
           .then(atms => this.setState({ atms }))
-          .catch(error => this.setState({ error }));
+          .catch(error => this.setState({ error: error.toString() }));
 
         return;
       }
@@ -65,7 +65,7 @@ class AtmsContainer extends Component {
 		);
 	}*/
 
-  findNearestATMs(geolocation, atms, size) {
+  static findNearestATMs(geolocation, atms, size) {
     if (atms && geolocation) {
       let atmsWithDistance = atms.map(atm => ({
         ...atm,
@@ -98,14 +98,14 @@ class AtmsContainer extends Component {
 
     if (error) {
       return (
-        <div>
+        <div className="errorMessage">
           Failed to find nearest {name} ATM's due to: {error.toString()}
         </div>
       );
     }
 
     // filter the atm data
-    let nearestAtms = this.findNearestATMs(geolocation, atms, AtmsContainer.NEAREST_ATM_QUANTITY);
+    let nearestAtms = AtmsContainer.findNearestATMs(geolocation, atms, AtmsContainer.NEAREST_ATM_QUANTITY);
     if (!nearestAtms) {
       return <LoadingComponent />;
     }

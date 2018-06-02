@@ -14,5 +14,6 @@ export default function calculateDistance(lat1, lon1, lat2, lon2) {
     Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
   let c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
   let d = R * c;
-  return d;
+
+  return parseFloat(d.toFixed(3), 10);
 }

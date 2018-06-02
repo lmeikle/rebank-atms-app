@@ -10,16 +10,15 @@ Implementation Notes:
 Time Taken:
 
 * 3 hours to get it all working.
-* Then as much time as I liked to clean up the code fully, add tests, fix the local CORS issue.
+* Then as much time as I liked to clean up the code fully, add a some tests, fix the local CORS issue.
 
 TODO's:
 
+* Continue to improve test coverage more
 * use CSS Modules (I would like to be able to do this without ejecting
   https://medium.com/@kitze/configure-create-react-app-without-ejecting-d8450e96196a)
 
 ---
-
-add tests
 
 work on router more so can clean up?
 const { geolocation, atms, error } = this.state;
