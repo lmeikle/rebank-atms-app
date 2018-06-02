@@ -9,20 +9,19 @@ import './Banks.css';
  * Clicking on it will show a list of closest ATM's for the selected bank.
  */
 const BanksComponent = ({ name, url }) => (
-	<Link to={{ pathname: '/atms', state: { name, url } }}>
-		<div className="BanksContainer">
-			<img src={logo} className="BanksLogo" alt="logo"/>
-			<div>{name}</div>
-		</div>
-	</Link>
+  <Link to={{ pathname: '/atms', state: { name, url } }}>
+    <div className="BanksContainer">
+      <img src={logo} className="BanksLogo" alt="logo" />
+      <div>{name}</div>
+    </div>
+  </Link>
 );
 
 BanksComponent.propTypes = {
-	name: string.isRequired,
-	url: string.isRequired,
+  name: string.isRequired,
+  url: string.isRequired
 };
 
-BanksComponent.defaultProps = {
-};
+BanksComponent.defaultProps = {};
 
 export default BanksComponent;

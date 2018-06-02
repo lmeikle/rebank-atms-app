@@ -1,94 +1,71 @@
-const AtmsAPI = {
+export function fetchAtmData(url) {
+  // when running locally we need to proxy the requests through our local server
+  if (window.location.hostname === 'localhost') {
+    url = 'api/?url=' + url;
+  }
 
-	CORS_WORKAROUND_URL: "https://cors.io/?",
+  // check if we already have the data in the cache
+  if (ATM_DATA_CACHE[url]) {
+    console.log('Getting data for ' + url + ' from ATM_DATA_CACHE');
+    return Promise.resolve(ATM_DATA_CACHE[url]);
+  }
 
-	ATM_DATA_CACHE: {},
+  return fetch(url)
+    .then(response => response.json())
+    .then(responseJson => processATMResponse(responseJson, url))
+    .catch(error => error);
+}
 
-	/**
-	 * @returns {Promise}
-	 */
-	fetchAtmData(url)
-	{
-		if (AtmsAPI.ATM_DATA_CACHE[url])
-		{
-			console.log("Getting data for " + url + " from ATM_DATA_CACHE");
-			return Promise.resolve(AtmsAPI.ATM_DATA_CACHE[url]);
-		}
+const ATM_DATA_CACHE = {};
 
-		// when running locally we need to proxy the requests through our local server, just using a crude check
-		if (window.location.hostname === "localhost")
-		{
-			url = "api/?url=" + url;
-		}
+const processATMResponse = (response, url) => {
+  if (response) {
+    let brandNode = response.data[0].Brand[0];
+    let brandName = brandNode.BrandName;
 
-		return fetch(url)
-			.then(response => response.json())
-			.then(responseJson => AtmsAPI._processATMResponse(responseJson, url))
-			.catch(error => error);
-	},
+    // create atm data for each node just with data we actually need
+    let atms = brandNode.ATM.map(atm => {
+      let postalAddress = atm.Location.PostalAddress;
+      return {
+        identification: atm.Identification,
+        name: brandName,
+        countryCode: postalAddress.Country,
+        address: formatAddress(postalAddress),
+        coords: postalAddress.GeoLocation.GeographicCoordinates,
+        numOfAtms: 1
+      };
+    });
 
-	/**
-	 * Process the huge amount of data and get just what we need.
-	 * Store it in a cache so we dont need to request it again
-	 */
-	_processATMResponse(response, url)
-	{
-		if (response)
-		{
-			let brandNode = response.data[0].Brand[0];
-			let brandName = brandNode.BrandName;
+    let filteredAtms = removeDuplicatesAndCountAtmsAtAdrress(atms);
 
-			// create atm data for each node just with data we actually need
-			let atms = brandNode.ATM.map(atm =>
-			{
-				let postalAddress = atm.Location.PostalAddress;
-				let geographicCoordinates = postalAddress.GeoLocation.GeographicCoordinates;
+    ATM_DATA_CACHE[url] = filteredAtms;
 
-				let address = "Unknown";
-				if (postalAddress)
-				{
-					address = "";
-					if (postalAddress.StreetName)
-					{
-						address = `${postalAddress.StreetName}, `;
-					}
-
-					address += `${postalAddress.TownName}, ${postalAddress.PostCode}`;
-				}
-
-				return {
-					identification: atm.Identification,
-					name: brandName,
-					countryCode: postalAddress.Country,
-					address,
-					geographicCoordinates,
-					googleMapsUrl: `http://www.google.com/maps/place/
-					${geographicCoordinates.Latitude},${geographicCoordinates.Longitude}`,
-					numOfAtms: 1
-				};
-			});
-
-			// filter out duplicate addresses, and keep track of the number of atm's at each address
-			let seen = {};
-			let filteredAtms = atms.filter(atm =>
-			{
-				if (seen.hasOwnProperty(atm.address))
-				{
-					seen[atm.address].numOfAtms++;
-					return false;
-				}
-				else
-				{
-					seen[atm.address] = atm;
-					return true;
-				}
-			});
-
-			AtmsAPI.ATM_DATA_CACHE[url] = filteredAtms;
-
-			return filteredAtms;
-		}
-	}
+    return filteredAtms;
+  }
 };
 
-export default AtmsAPI;
+const formatAddress = postalAddress => {
+  let address = 'Unknown';
+  if (postalAddress) {
+    address = '';
+    if (postalAddress.StreetName) {
+      address = `${postalAddress.StreetName}, `;
+    }
+    address += `${postalAddress.TownName}, ${postalAddress.PostCode}`;
+  }
+
+  return address;
+};
+
+const removeDuplicatesAndCountAtmsAtAdrress = atms => {
+  let seen = {};
+  return atms.filter(atm => {
+    if (seen.hasOwnProperty(atm.address)) {
+      seen[atm.address].numOfAtms++;
+      return false;
+    } else {
+      seen[atm.address] = atm;
+      return true;
+    }
+  });
+};

@@ -1,33 +1,31 @@
 import paticipantStoreJson from './paticipant_store.json';
 
-const BanksAPI = {
+/**
+ * Gets the list of banks which have an ATM API.
 
-	/**
-	 * At present this is just read from a downloaded file, as there is not an actual API request available.
-	 * Still written with promises in case this changes in the future.
-	 *
-	 * @returns {Promise}
-	 */
-	fetchBanksWithAtmAPIData()
-	{
-		return new Promise((resolve, reject) => {
-			// get the list of banks which have an ATM API
-			let banksWithAtmAPI = [];
-			let data = paticipantStoreJson.data;
-			for (let bank of data)
-			{
-				if (bank.supportedAPIs.atms)
-				{
-					banksWithAtmAPI.push({
-						name: bank.name,
-						url: `${bank.baseUrl}/${bank.supportedAPIs.atms[0]}/atms`
-					});
-				}
-			}
+ * At present this is just read from a downloaded file, as there is not an actual API request available.
+ * Still written with promises in case this changes in the future.
+ */
+export function fetchBanksWithAtmAPIData() {
+  return new Promise((resolve, reject) => {
+    // we only need to do this once
+    if (banksWithAtmAPI) {
+      return resolve(banksWithAtmAPI);
+    }
 
-			resolve(banksWithAtmAPI)
-		})
-	}
-};
+    banksWithAtmAPI = [];
+    let data = paticipantStoreJson.data;
+    for (let bank of data) {
+      if (bank.supportedAPIs.atms) {
+        banksWithAtmAPI.push({
+          name: bank.name,
+          url: `${bank.baseUrl}/${bank.supportedAPIs.atms[0]}/atms`
+        });
+      }
+    }
 
-export default BanksAPI;
+    resolve(banksWithAtmAPI);
+  });
+}
+
+let banksWithAtmAPI = null;
