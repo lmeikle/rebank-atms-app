@@ -19,11 +19,11 @@ ShallowWrapper {
     "props": Object {
       "children": Array [
         <div
-          className="AppTopBar"
+          className="app-topbar"
 >
           <img
                     alt="logo"
-                    className="AppTorBarLogo"
+                    className="app-topbar-logo"
                     src="logo.svg"
           />
 </div>,
@@ -40,7 +40,7 @@ ShallowWrapper {
           </Switch>
 </BrowserRouter>,
       ],
-      "className": "App",
+      "className": "app",
     },
     "ref": null,
     "rendered": Array [
@@ -51,10 +51,10 @@ ShallowWrapper {
         "props": Object {
           "children": <img
             alt="logo"
-            className="AppTorBarLogo"
+            className="app-topbar-logo"
             src="logo.svg"
 />,
-          "className": "AppTopBar",
+          "className": "app-topbar",
         },
         "ref": null,
         "rendered": Object {
@@ -63,7 +63,7 @@ ShallowWrapper {
           "nodeType": "host",
           "props": Object {
             "alt": "logo",
-            "className": "AppTorBarLogo",
+            "className": "app-topbar-logo",
             "src": "logo.svg",
           },
           "ref": null,
@@ -147,11 +147,11 @@ ShallowWrapper {
       "props": Object {
         "children": Array [
           <div
-            className="AppTopBar"
+            className="app-topbar"
 >
             <img
                         alt="logo"
-                        className="AppTorBarLogo"
+                        className="app-topbar-logo"
                         src="logo.svg"
             />
 </div>,
@@ -168,7 +168,7 @@ ShallowWrapper {
             </Switch>
 </BrowserRouter>,
         ],
-        "className": "App",
+        "className": "app",
       },
       "ref": null,
       "rendered": Array [
@@ -179,10 +179,10 @@ ShallowWrapper {
           "props": Object {
             "children": <img
               alt="logo"
-              className="AppTorBarLogo"
+              className="app-topbar-logo"
               src="logo.svg"
 />,
-            "className": "AppTopBar",
+            "className": "app-topbar",
           },
           "ref": null,
           "rendered": Object {
@@ -191,7 +191,7 @@ ShallowWrapper {
             "nodeType": "host",
             "props": Object {
               "alt": "logo",
-              "className": "AppTorBarLogo",
+              "className": "app-topbar-logo",
               "src": "logo.svg",
             },
             "ref": null,

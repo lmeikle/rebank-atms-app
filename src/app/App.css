@@ -1,4 +1,4 @@
-.App {
+.app {
   max-width: 400px;
   margin-left: auto;
   margin-right: auto;
@@ -12,12 +12,12 @@ a{color:#1e70bf}
 a:hover{text-decoration:none}
 a:hover{color:#ED3773}
 
-.AppTopBar {
+.app-topbar {
   height: 70px;
   background-color: #FFFFFF;
 }
 
-.AppTorBarLogo {
+.app-topbar-logo {
   margin-top: 20px;
   width: 40%;
 }

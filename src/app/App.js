@@ -9,9 +9,9 @@ class App extends Component {
 	render()
 	{
 		return (
-			<div className="App">
-				<div className="AppTopBar">
-					<img src={logo} className="AppTorBarLogo" alt="logo"/>
+			<div className="app">
+				<div className="app-topbar">
+					<img src={logo} className="app-topbar-logo" alt="logo"/>
 				</div>
 				<Router>
 					<Switch>

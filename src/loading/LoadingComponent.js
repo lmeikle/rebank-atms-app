@@ -7,7 +7,7 @@ import './Loading.css';
  */
 const LoadingComponent = () => (
   <div>
-    <img src={logo} className="LoadingSpinner" alt="logo" />
+    <img src={logo} className="loading-spinner" alt="logo" />
   </div>
 );
 

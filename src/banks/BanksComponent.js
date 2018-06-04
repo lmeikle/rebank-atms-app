@@ -10,8 +10,8 @@ import './Banks.css';
  */
 const BanksComponent = ({ name, url }) => (
   <Link to={{ pathname: '/atms', state: { name, url } }}>
-    <div className="BanksContainer">
-      <img src={logo} className="BanksLogo" alt="logo" />
+    <div className="banks">
+      <img src={logo} className="banks-logo" alt="logo" />
       <div>{name}</div>
     </div>
   </Link>

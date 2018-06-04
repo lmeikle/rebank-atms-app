@@ -1,4 +1,4 @@
-.LoadingSpinner {
+.loading-spinner {
   animation: loading-spinner-spin infinite 20s linear;
   height: 80px;
 }

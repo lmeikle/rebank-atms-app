@@ -14,6 +14,7 @@ const props = {
 };
 
 const initialState = {
+  name: null,
   geolocation: null,
   atms: null,
   error: null

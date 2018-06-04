@@ -10,7 +10,7 @@ const AtmsComponent = ({ name, countryCode, address, coords, distance, numOfAtms
   const googleMapsUrl = `http://www.google.com/maps/place/${coords.Latitude},${coords.Longitude}`;
   return (
     <a href={googleMapsUrl} target="_blank">
-      <div className="AtmContainer">
+      <div className="atm">
         <div>Bank Name: {name}</div>
         <div>Address: {address}</div>
         <div>Country: {countryCode}</div>

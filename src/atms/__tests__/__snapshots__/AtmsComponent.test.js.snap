@@ -30,7 +30,7 @@ ShallowWrapper {
     "nodeType": "host",
     "props": Object {
       "children": <div
-        className="AtmContainer"
+        className="atm"
 >
         <div>
                 Bank Name: 
@@ -86,7 +86,7 @@ ShallowWrapper {
             3
 </div>,
         ],
-        "className": "AtmContainer",
+        "className": "atm",
       },
       "ref": null,
       "rendered": Array [
@@ -189,7 +189,7 @@ ShallowWrapper {
       "nodeType": "host",
       "props": Object {
         "children": <div
-          className="AtmContainer"
+          className="atm"
 >
           <div>
                     Bank Name: 
@@ -245,7 +245,7 @@ ShallowWrapper {
               3
 </div>,
           ],
-          "className": "AtmContainer",
+          "className": "atm",
         },
         "ref": null,
         "rendered": Array [

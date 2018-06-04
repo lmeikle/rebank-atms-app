@@ -1,4 +1,4 @@
-.BanksContainer {
+.banks {
   display: flex;
   align-items: center;
   border: 1px solid #002742;
@@ -7,6 +7,6 @@
   background-color: #fafafa;
 }
 
-.BanksLogo {
+.banks-logo {
   height: 60px;
 }
